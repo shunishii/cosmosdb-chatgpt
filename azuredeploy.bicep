@@ -115,6 +115,7 @@ resource cosmosDbContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/c
       id: cosmosDbSettings.container.name
       partitionKey: {
         paths: [
+          '/userId'
           '/sessionId'
         ]
         kind: 'Hash'
@@ -124,6 +125,9 @@ resource cosmosDbContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/c
         indexingMode: 'Consistent'
         automatic: true
         includedPaths: [
+          {
+            path: '/userId/?'
+          }
           {
             path: '/sessionId/?'
           }
